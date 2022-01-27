@@ -1,0 +1,64 @@
+version: "3"
+services: 
+    nginx:
+        build: 
+            context: ./services/nginx
+            args:
+                NGINX_VERSION: ${NGINX_VERSION}
+                TZ: ${TZ}
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+            - ${NGINX_VHOST_CONF_DIR}:/etc/nginx/conf.d:ro
+            - ${NGINX_VHOST_OTHER_CONF_DIR}:/etc/nginx/nginxconfig.io:ro
+            - ${NGINX_LOGS_DIR}:/var/log/nginx:rw
+            - ${SSL_CERT_DIR}:/www/ssl:rw
+            - ${VHOST_DIR}:/www/wwwroot:ro
+            - phpsocket:/var/run
+        restart: always
+        
+    php:
+        build:
+            context: ./services/php
+            args:
+                PHP_VERSION: ${PHP_VERSION}
+                PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+                TZ: ${TZ}
+        volumes:
+            - ${VHOST_DIR}:/www/wwwroot:ro
+            - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
+            - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.conf:ro
+            - ${PHP_LOGS_DIR}:/var/log/php:rw
+            - phpsocket:/var/run
+        restart: always
+    
+    mysql:
+        build: 
+            context: ./services/mysql
+            args:
+                MYSQL_VERSION: ${MYSQL_VERSION}
+                TZ: ${TZ}
+        #ports:
+        #    - "${MYSQL_HOST_PORT}:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+        volumes:
+            - ${MYSQL_DATA_SAVA_DIR}:/var/lib/mysql:rw
+            - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+            - ${MYSQL_LOGS_DIR}:/var/log/mysql:rw
+        restart: always
+        
+    phpmyadmin:
+        build:
+            context: ./services/phpmyadmin
+            args:
+                PHPMYADMIN_VERSION: ${PHPMYADMIN_VERSION}
+                TZ: ${TZ}
+        environment:
+            PMA_ARBITRARY: "1"
+        volumes:
+            - ${PHPMYADMIN_CONF_FILE}:/etc/phpmyadmin/config.user.inc.php:ro
+volumes:
+    phpsocket:
