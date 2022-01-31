@@ -1,4 +1,4 @@
-### Project Use：
+### 使用方法：
 ```
 cp .example.env .env
 
