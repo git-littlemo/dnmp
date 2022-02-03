@@ -56,9 +56,12 @@ services:
             args:
                 PHPMYADMIN_VERSION: ${PHPMYADMIN_VERSION}
                 TZ: ${TZ}
+        ports:
+            - "8080:80"
         environment:
             PMA_ARBITRARY: "1"
         volumes:
             - ${PHPMYADMIN_CONF_FILE}:/etc/phpmyadmin/config.user.inc.php:ro
+        restart: always
 volumes:
     phpsocket:
