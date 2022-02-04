@@ -26,6 +26,8 @@ services:
                 PHP_VERSION: ${PHP_VERSION}
                 PHP_EXTENSIONS: ${PHP_EXTENSIONS}
                 TZ: ${TZ}
+        environment:
+            UPLOAD_LIMIT: ${UPLOAD_LIMIT}
         volumes:
             - ${VHOST_DIR}:/www/wwwroot:ro
             - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
@@ -60,6 +62,7 @@ services:
             - "8080:80"
         environment:
             PMA_ARBITRARY: "1"
+            UPLOAD_LIMIT: ${UPLOAD_LIMIT}
         volumes:
             - ${PHPMYADMIN_CONF_FILE}:/etc/phpmyadmin/config.user.inc.php:ro
         restart: always
