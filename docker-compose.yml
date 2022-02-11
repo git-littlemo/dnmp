@@ -29,7 +29,7 @@ services:
         environment:
             UPLOAD_LIMIT: ${UPLOAD_LIMIT}
         volumes:
-            - ${VHOST_DIR}:/www/wwwroot:ro
+            - ${VHOST_DIR}:/www/wwwroot:rw
             - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini:ro
             - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.conf:ro
             - ${PHP_LOGS_DIR}:/var/log/php:rw
