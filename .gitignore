@@ -1,17 +1,15 @@
 www/wwwroot/*/
-
 !www/wwwroot/default/
 
 services/nginx/conf.d/*
-
 !services/nginx/conf.d/default.conf
 
 www/logs/*/*
-
 www/ssl/*
-
 www/data/mysql/*
 
 .env
 
 !.gitkeep
+!.example.env
+!.gitignore
