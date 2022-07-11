@@ -1,6 +1,6 @@
 ### 使用方法：
 ```
-cp .example.env .env
+cp env .env
 
 openssl dhparam -out ./www/ssl/dhparam.pem 2048
 

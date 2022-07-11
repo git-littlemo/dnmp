@@ -10,4 +10,4 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 RUN echo 'TZ="${TZ}"; export TZ' >> /root/.profile && \
     chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions ${PHP_EXTENSIONS}
+    install-php-extensions $(echo ${PHP_EXTENSIONS} | sed 's/,/ /g')
