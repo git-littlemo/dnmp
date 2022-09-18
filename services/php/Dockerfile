@@ -10,4 +10,6 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
     chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions $(echo ${PHP_EXTENSIONS} | sed 's/,/ /g')
+    install-php-extensions $(echo ${PHP_EXTENSIONS} | sed 's/,/ /g') &&\
+    mkdir -p -m 755 /var/log/php && \
+    chown -R www-data:www-data /var/log/php
