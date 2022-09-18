@@ -4,4 +4,4 @@ FROM ${PHPMYADMIN_VERSION}
 
 ARG TZ
 
-RUN echo 'TZ="${TZ}"; export TZ' >> /root/.profile
+RUN cp /usr/share/zoneinfo/Asia/${TZ} /etc/localtime
