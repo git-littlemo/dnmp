@@ -14,7 +14,7 @@ VHOST_DIR = ./www/wwwroot
 PHP_VERSION = php:7.4-fpm
 PHP_INI_FILE = ./services/php/php.ini
 PHP_FPM_CONF_FILE = ./services/php/php-fpm.conf
-PHP_EXTENSIONS = @composer,opcache,pdo_mysql
+PHP_EXTENSIONS = @composer,opcache,intl,pdo_mysql,mysqli
 PHP_LOGS_DIR = ./www/logs/php
 UPLOAD_LIMIT = 100M
 
