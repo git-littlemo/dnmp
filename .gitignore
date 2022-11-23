@@ -12,3 +12,4 @@ www/data/mysql/*
 !.gitkeep
 
 .idea
+.vscode
